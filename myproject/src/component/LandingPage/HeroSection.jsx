@@ -7,9 +7,9 @@ export default function HeroSection() {
   return (
     <div>
       {/* Hero Section */}
-      <div className="hero-section bg-light py-5">
-        <div className="container" style={{ paddingTop: '40px' }}>
-          <div className="row align-items-center">
+      <div className="hero-section bg-light py-5" style={{ minHeight: '100vh' }}>
+        <div className="container" style={{ paddingTop: '140px' }}>
+          <div className="row align-items-center" style={{ height: '100%' }}>
             {/* Left Text Section */}
             <div className="col-md-6 mb-4 mb-md-0">
               <h1 className="display-4 fw-bold text-success">
@@ -28,6 +28,7 @@ export default function HeroSection() {
                 src={heroimage}
                 alt="Hero"
                 className="img-fluid rounded shadow"
+                style={{ maxHeight: '80vh', objectFit: 'cover' }} // Membuat gambar sesuai dengan ukuran layar
               />
             </div>
           </div>
