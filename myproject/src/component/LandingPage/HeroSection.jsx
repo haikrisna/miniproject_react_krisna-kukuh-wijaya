@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import heroimage from './assets/heroimage.png';
 
 
 export default function HeroSection() {
@@ -24,7 +25,7 @@ export default function HeroSection() {
             {/* Right Image/Logo Section */}
             <div className="col-md-6 text-center">
               <img
-                src="https://via.placeholder.com/400"
+                src={heroimage}
                 alt="Hero"
                 className="img-fluid rounded shadow"
               />
