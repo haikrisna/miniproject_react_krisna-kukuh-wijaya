@@ -35,6 +35,27 @@ export default function HeroSection() {
         </div>
       </div>
 
+
+      <div>
+
+        <h1>About</h1>
+
+      </div>
+
+      <div>
+
+        <h1>Card gambar kiri teks kanan</h1>
+
+      </div>
+
+      <div>
+
+        <h1>Card gambar kanan teks kiri</h1>
+
+      </div>
+
+      
+
       {/* Card Section for Food and Waste Information */}
       <div className="container py-5">
         <h2 className="text-center mb-4">Makanan dan Limbah</h2>

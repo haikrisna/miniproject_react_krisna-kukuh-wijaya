@@ -1,11 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function NavbarComponent() {
+  const navigate = useNavigate(); 
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
         <div className="container">
-          <a className="navbar-brand fw-bold text-success" href="#">
+          <a className="navbar-brand fw-bold text-success" onClick={() => navigate("/")}>
             Archiwaste
           </a>
           <button
@@ -21,30 +24,28 @@ export default function NavbarComponent() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mx-auto">
-              {" "}
-              {/* Menambahkan mx-auto untuk center */}
               <li className="nav-item">
-                <a className="nav-link text-dark" href="#">
+                <a className="nav-link text-dark" onClick={() => navigate("/")} role="button">
                   Home
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-dark" href="#">
+                <a className="nav-link text-dark" onClick={() => navigate("/mealplan")} role="button">
                   Meal Plan
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-dark" href="#">
-                  About
+                <a className="nav-link text-dark" onClick={() => navigate("/chat")} role="button">
+                  Chat AI
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-dark" href="#">
-                  Contact
-                </a>
+                <a className="nav-link text-dark">Contact</a>
               </li>
             </ul>
-            <button class="btn btn-success" type="submit">Login</button>
+            <button className="btn btn-success" type="submit">
+              Login
+            </button>
           </div>
         </div>
       </nav>
