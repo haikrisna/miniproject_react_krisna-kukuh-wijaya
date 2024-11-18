@@ -1,5 +1,6 @@
 import React from 'react'
 import NavbarComponent from '../LandingPage/NavbarComponent'
+import FooterComponent from '../LandingPage/FooterComponent'
 
 
 export default function MealPlan() {

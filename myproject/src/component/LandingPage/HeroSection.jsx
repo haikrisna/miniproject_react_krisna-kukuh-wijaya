@@ -36,22 +36,116 @@ export default function HeroSection() {
       </div>
 
 
-      <div>
-
-        <h1>About</h1>
-
+      {/* Section 1: Income Share Agreement */}
+      <div className="container py-5">
+        <div className="row align-items-center">
+          {/* Left Placeholder for Image */}
+          <div className="col-md-6">
+            <div
+              style={{
+                width: '100%',
+                height: '300px',
+                backgroundColor: '#e9ecef',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '8px',
+              }}
+            >
+              <p className="text-muted">Placeholder Image</p>
+            </div>
+          </div>
+          {/* Right Text */}
+          <div className="col-md-6">
+            <h2 className="fw-bold">Apa itu FOODWASTE?</h2>
+            <p>
+            Food waste adalah istilah untuk sisa makanan yang masih bisa dimakan, namun dibuang dan menjadi sampah. Food waste bisa terjadi karena beberapa hal, seperti: Tidak menghabiskan makanan, Makan tidak sesuai porsi, Membeli atau memasak makanan yang tidak disukai, Gaya hidup yang memaksa untuk menghabiskan makanan di depan orang lain, Makanan yang sudah kedaluwarsa.
+            </p>
+            <ul className="list-unstyled">
+              <li className="mb-2">
+                ✅ <strong>Makanan Kedaluwarsa</strong>
+              </li>
+              <li className="mb-2">
+                ✅ <strong>Sisa Makanan</strong>
+              </li>
+              <li className="mb-2">
+                ✅ <strong>Sayuran dan Buah Busuk</strong>
+              </li>
+              <li className="mb-2">
+                ✅ <strong>Overbuying</strong>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
-      <div>
-
-        <h1>Card gambar kiri teks kanan</h1>
-
+      {/* Section 2: Kenapa Dicoding Academy Berbeda */}
+      <div className="container py-5 bg-light">
+        <div className="row align-items-center">
+          {/* Left Text */}
+          <div className="col-md-6">
+            <h2 className="fw-bold">Kenapa kita harus mengatasinya?</h2>
+            <p>
+            Food waste merupakan masalah yang perlu diatasi karena memiliki dampak buruk bagi lingkungan dan kelaparan. Sampah makanan yang menumpuk di TPA akan menghasilkan gas metana dan karbondioksida yang dapat merusak lapisan ozon dan menyebabkan pemanasan global.
+            </p>
+            <ul className="list-unstyled">
+              <li className="mb-2">📚 Emisi Gas Rumah Kaca</li>
+              <li className="mb-2">📅 Pencemaran Air dan Tanah</li>
+              <li className="mb-2">💻 Kerugian Finansial</li>
+              <li className="mb-2">🏆 Masalah Kemanusiaan</li>
+            </ul>
+          </div>
+          {/* Right Placeholder for Image */}
+          <div className="col-md-6">
+            <div
+              style={{
+                width: '100%',
+                height: '300px',
+                backgroundColor: '#e9ecef',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '8px',
+              }}
+            >
+              <p className="text-muted">Placeholder Image</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div>
-
-        <h1>Card gambar kanan teks kiri</h1>
-
+      {/* Section 3: About Us */}
+      <div className="container py-5">
+        <div className="row align-items-center">
+          {/* Left Text */}
+          <div className="col-md-6">
+            <h2 className="fw-bold">About Us</h2>
+            <p>
+            Aplikasi kami memiliki fitur <strong>Mealplan</strong>, yang membantu Anda merencanakan kebutuhan makanan dengan 
+              efisien, serta fitur <strong>chat dengan AI</strong>, yang siap memberikan solusi praktis dan edukasi untuk 
+              membantu Anda mengurangi limbah makanan sehari-hari.
+            </p>
+            <p>
+            Bersama <strong>Archiwaste,</strong> mari kita wujudkan lingkungan yang lebih sehat dan berkelanjutan!
+            </p>
+          </div>
+          {/* Right Placeholder for Image */}
+          <div className="col-md-6">
+            <div
+              style={{
+                width: '100%',
+                height: '300px',
+                backgroundColor: '#e9ecef',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '8px',
+              }}
+            >
+              <p className="text-muted">Placeholder Image</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       
