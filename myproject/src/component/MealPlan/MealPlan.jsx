@@ -14,6 +14,9 @@ export default function MealPlan() {
   const [mealPlansList, setMealPlansList] = useState([]);
   const [foods, setFoods] = useState([]);
 
+  // URL untuk API storemealplan
+  const API_URL = "https://673d82f30118dbfe8607827b.mockapi.io/storemealplan";
+
   // Fetching data makanan dari API
   useEffect(() => {
     const fetchFoods = async () => {
@@ -25,7 +28,17 @@ export default function MealPlan() {
       }
     };
 
+    const fetchMealPlans = async () => {
+      try {
+        const response = await axios.get(API_URL);
+        setMealPlansList(response.data);
+      } catch (error) {
+        console.error("Error fetching meal plans:", error);
+      }
+    };
+
     fetchFoods();
+    fetchMealPlans();
   }, []);
 
   // Handle perubahan input form
@@ -51,27 +64,55 @@ export default function MealPlan() {
     return totalCalories;
   };
 
-  // Handle submit form
-  const handleSubmit = (e) => {
+  // Handle submit form untuk menambahkan meal plan ke API
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Hitung total kalori sebelum menambahkan meal plan
     const totalCalories = calculateTotalCalories();
 
-    // Menambahkan data meal plan dan total kalori ke dalam list mealPlansList
-    setMealPlansList([
-      ...mealPlansList,
-      { ...mealPlan, totalCalories },
-    ]);
+    // Membuat objek meal plan yang akan disubmit ke API
+    const newMealPlan = {
+      storecreatedAt: new Date().toISOString(),
+      storebreakfeast: mealPlan.breakfast,
+      storelunch: mealPlan.lunch,
+      storedinner: mealPlan.dinner,
+      storesnack: mealPlan.snack,
+      storecalories: totalCalories,
+      storeID: (mealPlansList.length + 1).toString(), // ID berdasarkan jumlah meal plan yang ada
+    };
 
-    // Reset form setelah submit
-    setMealPlan({
-      date: "",
-      breakfast: "",
-      lunch: "",
-      dinner: "",
-      snack: "",
-    });
+    try {
+      // Kirim data meal plan ke API
+      await axios.post(API_URL, newMealPlan);
+
+      // Menambahkan meal plan ke dalam daftar tanpa me-refresh halaman
+      setMealPlansList([...mealPlansList, newMealPlan]);
+
+      // Reset form setelah submit
+      setMealPlan({
+        date: "",
+        breakfast: "",
+        lunch: "",
+        dinner: "",
+        snack: "",
+      });
+    } catch (error) {
+      console.error("Error submitting meal plan:", error);
+    }
+  };
+
+  // Fungsi untuk menghapus meal plan dari daftar
+  const handleDelete = async (id) => {
+    try {
+      // Hapus meal plan dari API
+      await axios.delete(`${API_URL}/${id}`);
+
+      // Hapus meal plan dari state list
+      setMealPlansList(mealPlansList.filter((plan) => plan.storeID !== id));
+    } catch (error) {
+      console.error("Error deleting meal plan:", error);
+    }
   };
 
   return (
@@ -190,9 +231,15 @@ export default function MealPlan() {
             <h3 className="text-center">Daftar Meal Plan</h3>
             <ul className="list-group">
               {mealPlansList.map((plan, index) => (
-                <li key={index} className="list-group-item">
-                  <strong>{plan.date}</strong>: Sarapan - {plan.breakfast}, Makan Siang - {plan.lunch},
-                  Makan Malam - {plan.dinner}, Snack - {plan.snack}, Total Kalori: {plan.totalCalories}
+                <li key={plan.storeID} className="list-group-item">
+                  <strong>{plan.storecreatedAt}</strong>: Sarapan - {plan.storebreakfeast}, Makan Siang - {plan.storelunch},
+                  Makan Malam - {plan.storedinner}, Snack - {plan.storesnack}, Total Kalori: {plan.storecalories}
+                  <button
+                    className="btn btn-danger btn-sm float-end"
+                    onClick={() => handleDelete(plan.storeID)}
+                  >
+                    Hapus
+                  </button>
                 </li>
               ))}
             </ul>
