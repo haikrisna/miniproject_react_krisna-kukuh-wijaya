@@ -34,10 +34,37 @@ export default function MealPlan() {
     setMealPlan({ ...mealPlan, [name]: value });
   };
 
+  // Fungsi untuk menghitung total kalori berdasarkan pilihan menu
+  const calculateTotalCalories = () => {
+    let totalCalories = 0;
+
+    // Menambahkan kalori dari menu yang dipilih
+    const selectedFoods = [mealPlan.breakfast, mealPlan.lunch, mealPlan.dinner, mealPlan.snack];
+
+    selectedFoods.forEach((food) => {
+      const foodItem = foods.find((item) => item.food === food);
+      if (foodItem) {
+        totalCalories += foodItem.calories;
+      }
+    });
+
+    return totalCalories;
+  };
+
   // Handle submit form
   const handleSubmit = (e) => {
     e.preventDefault();
-    setMealPlansList([...mealPlansList, mealPlan]);
+
+    // Hitung total kalori sebelum menambahkan meal plan
+    const totalCalories = calculateTotalCalories();
+
+    // Menambahkan data meal plan dan total kalori ke dalam list mealPlansList
+    setMealPlansList([
+      ...mealPlansList,
+      { ...mealPlan, totalCalories },
+    ]);
+
+    // Reset form setelah submit
     setMealPlan({
       date: "",
       breakfast: "",
@@ -165,7 +192,7 @@ export default function MealPlan() {
               {mealPlansList.map((plan, index) => (
                 <li key={index} className="list-group-item">
                   <strong>{plan.date}</strong>: Sarapan - {plan.breakfast}, Makan Siang - {plan.lunch},
-                  Makan Malam - {plan.dinner}, Snack - {plan.snack}
+                  Makan Malam - {plan.dinner}, Snack - {plan.snack}, Total Kalori: {plan.totalCalories}
                 </li>
               ))}
             </ul>
