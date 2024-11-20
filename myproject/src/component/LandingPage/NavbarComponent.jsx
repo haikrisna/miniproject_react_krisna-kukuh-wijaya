@@ -40,7 +40,7 @@ export default function NavbarComponent() {
           </a>
         </li>
         <li className="nav-item">
-          <a className="nav-link text-dark">Contact</a>
+          <a className="nav-link text-dark" onClick={()=> navigate("/mealplan/reminder")} role="button">Notification</a>
         </li>
       </ul>
       <button className="btn btn-success" type="button">
