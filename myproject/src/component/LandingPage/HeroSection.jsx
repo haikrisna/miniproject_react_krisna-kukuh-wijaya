@@ -89,10 +89,10 @@ export default function HeroSection() {
             Food waste merupakan masalah yang perlu diatasi karena memiliki dampak buruk bagi lingkungan dan kelaparan. Sampah makanan yang menumpuk di TPA akan menghasilkan gas metana dan karbondioksida yang dapat merusak lapisan ozon dan menyebabkan pemanasan global.
             </p>
             <ul className="list-unstyled">
-              <li className="mb-2">📚 Emisi Gas Rumah Kaca</li>
-              <li className="mb-2">📅 Pencemaran Air dan Tanah</li>
-              <li className="mb-2">💻 Kerugian Finansial</li>
-              <li className="mb-2">🏆 Masalah Kemanusiaan</li>
+              <li className="mb-2">🌏🔥 Emisi Gas Rumah Kaca</li>
+              <li className="mb-2">🌱💧 Pencemaran Air dan Tanah</li>
+              <li className="mb-2">📉 Kerugian Finansial</li>
+              <li className="mb-2">🤝 Masalah Kemanusiaan</li>
             </ul>
           </div>
           {/* Right Placeholder for Image */}
@@ -117,20 +117,9 @@ export default function HeroSection() {
       {/* Section 3: About Us */}
       <div className="container py-5">
         <div className="row align-items-center">
-          {/* Left Text */}
-          <div className="col-md-6">
-            <h2 className="fw-bold">About Us</h2>
-            <p>
-            Aplikasi kami memiliki fitur <strong>Mealplan</strong>, yang membantu Anda merencanakan kebutuhan makanan dengan 
-              efisien, serta fitur <strong>chat dengan AI</strong>, yang siap memberikan solusi praktis dan edukasi untuk 
-              membantu Anda mengurangi limbah makanan sehari-hari.
-            </p>
-            <p>
-            Bersama <strong>Archiwaste,</strong> mari kita wujudkan lingkungan yang lebih sehat dan berkelanjutan!
-            </p>
-          </div>
-          {/* Right Placeholder for Image */}
-          <div className="col-md-6">
+          {/* Right Text */}
+                    {/* Right Placeholder for Image */}
+                    <div className="col-md-6">
             <div
               style={{
                 width: '100%',
@@ -145,6 +134,21 @@ export default function HeroSection() {
               <p className="text-muted">Placeholder Image</p>
             </div>
           </div>
+
+          {/* Left Image */}
+
+          <div className="col-md-6">
+            <h2 className="fw-bold">About Us</h2>
+            <p>
+            Website kami memiliki fitur <strong>Mealplan</strong>, yang membantu Anda merencanakan kebutuhan makanan dengan 
+              efisien, serta fitur <strong>chat dengan AI</strong>, yang siap memberikan solusi praktis dan edukasi untuk 
+              membantu Anda mengurangi limbah makanan sehari-hari.
+            </p>
+            <p>
+            Bersama <strong>Archiwaste,</strong> mari kita wujudkan lingkungan yang lebih sehat dan berkelanjutan!
+            </p>
+          </div>
+
         </div>
       </div>
 

@@ -46,7 +46,7 @@ export default function FooterComponent() {
         </div>
         <hr className="bg-light" />
         <div className="text-center small">
-          &copy; {new Date().getFullYear()} MyWebsite. All Rights Reserved.
+          &copy; {new Date().getFullYear()} Archiwaste. All Rights Reserved.
         </div>
       </div>
     </footer>
