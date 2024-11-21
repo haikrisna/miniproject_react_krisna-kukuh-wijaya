@@ -1,4 +1,4 @@
-[
+export const data = [
   {
     "food": "Nasi Goreng",
     "calories": 300,
