@@ -25,7 +25,7 @@ export default function NavbarComponent() {
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav mx-auto">
         <li className="nav-item">
-          <a className="nav-link text-dark" onClick={() => navigate("/")} role="button">
+          <a className="nav-link text-dark" onClick={() => navigate("/landingpage")} role="button">
             Home
           </a>
         </li>
@@ -43,8 +43,11 @@ export default function NavbarComponent() {
           <a className="nav-link text-dark" onClick={()=> navigate("/mealplan/reminder")} role="button">Notification</a>
         </li>
       </ul>
-      <button className="btn btn-success" type="button">
+      <button className="btn btn-outline-success me-2" type="button" onClick={()=>navigate('/login')}>
         Login
+      </button>
+      <button className="btn btn-success" type="button">
+        Get Started
       </button>
     </div>
   </div>

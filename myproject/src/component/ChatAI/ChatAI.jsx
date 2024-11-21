@@ -2,6 +2,7 @@ import { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import ReactMarkdown from "react-markdown"; // Import ReactMarkdown
 import { data } from "./data"; // Sesuaikan path jika perlu
+import NavbarComponent from "../LandingPage/NavbarComponent";
 
 function ChatAI() {
   const [inputUser, setInputUser] = useState("");
@@ -80,7 +81,8 @@ Tidak boleh menjawab di luar dari data dan history yang diberikan. bahwa saya ad
 
   return (
     <>
-      <h1>Gemini AI</h1>
+      <NavbarComponent/>
+      <h1>Archiwaste AI</h1>
       <input type="text" onChange={handleChange} />
       <button onClick={handlePromptSubmit} type="button">
         Submit

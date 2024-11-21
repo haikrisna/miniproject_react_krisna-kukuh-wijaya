@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import NavbarComponent from "../LandingPage/NavbarComponent";
 
 export default function Reminder() {
   const [mealPlans, setMealPlans] = useState([]);
@@ -52,6 +53,8 @@ export default function Reminder() {
   }, [mealPlans]);
 
   return (
+    <>
+    <NavbarComponent/>
     <div className="container py-4">
       <h1 className="text-center">Pengingat Meal Plan</h1>
       <div className="mt-4">
@@ -76,5 +79,6 @@ export default function Reminder() {
         </ul>
       </div>
     </div>
+    </>
   );
 }
