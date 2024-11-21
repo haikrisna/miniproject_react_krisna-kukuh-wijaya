@@ -25,18 +25,20 @@ export default function Reminder() {
     const checkReminders = () => {
       const now = new Date();
       const currentDate = now.toISOString().split("T")[0]; // Format YYYY-MM-DD
-      const currentTime = now.getHours() * 60 + now.getMinutes(); // Total menit saat ini
+      const currentTime = now.toTimeString().slice(0, 5); // Format HH:mm
 
       mealPlans.forEach((mealPlan) => {
         const planDate = new Date(mealPlan.storecreatedAt).toISOString().split("T")[0];
+
         if (planDate === currentDate) {
           const reminders = [
-            { time: 7 * 60, meal: mealPlan.storebreakfeast }, // Jam 7:00
-            { time: 11 * 60, meal: mealPlan.storelunch }, // Jam 11:00
-            { time: 18 * 60 + 30, meal: mealPlan.storedinner}, // Jam 18:00
+            { time: "07:00", meal: mealPlan.storebreakfeast }, // Jam 7:00
+            { time: "11:00", meal: mealPlan.storelunch }, // Jam 11:00
+            { time: "23:37", meal: mealPlan.storedinner }, // Jam 18:00
           ];
 
           reminders.forEach(({ time, meal }) => {
+            console.log(`Current time: ${currentTime}, Reminder time: ${time}`); // Debug
             if (currentTime === time) {
               alert(`Pengingat: Saatnya makan ${meal}!`);
             }
@@ -54,31 +56,58 @@ export default function Reminder() {
 
   return (
     <>
-    <NavbarComponent/>
-    <div className="container py-4">
-      <h1 className="text-center">Pengingat Meal Plan</h1>
-      <div className="mt-4">
-        <h3 className="text-center">Daftar Meal Plan Hari Ini</h3>
-        <ul className="list-group">
-          {mealPlans.map((mealPlan) => {
-            const date = new Date(mealPlan.storecreatedAt).toISOString().split("T")[0];
-            const today = new Date().toISOString().split("T")[0];
+      <NavbarComponent />
+      <div className="container py-4" style={{ marginTop: "80px" }}>
+        {/* Header */}
+        <h1 className="text-center mb-4">Reminder</h1>
 
-            if (date === today) {
-              return (
-                <li key={mealPlan.storeID} className="list-group-item">
-                  <strong>{mealPlan.storecreatedAt}</strong>: Sarapan -{" "}
-                  {mealPlan.storebreakfeast}, Makan Siang - {mealPlan.storelunch}, Makan
-                  Malam - {mealPlan.storedinner}
-                </li>
-              );
-            }
+        {/* Daftar Meal Plan */}
+        <div className="mt-4">
+          <h3 className="text-center mb-3">Daftar Makanan Hari Ini</h3>
+          {mealPlans.some(
+            (mealPlan) =>
+              new Date(mealPlan.storecreatedAt).toISOString().split("T")[0] ===
+              new Date().toISOString().split("T")[0]
+          ) ? (
+            <div className="row">
+              {mealPlans.map((mealPlan) => {
+                const date = new Date(mealPlan.storecreatedAt)
+                  .toISOString()
+                  .split("T")[0];
+                const today = new Date().toISOString().split("T")[0];
 
-            return null;
-          })}
-        </ul>
+                if (date === today) {
+                  return (
+                    <div key={mealPlan.storeID} className="col-md-6 mb-3">
+                      <div className="card h-100">
+                        <div className="card-body">
+                          <h5 className="card-title">
+                            <strong>{mealPlan.storecreatedAt}</strong>
+                          </h5>
+                          <ul className="list-unstyled">
+                            <li>
+                              <strong>Sarapan:</strong> {mealPlan.storebreakfeast}
+                            </li>
+                            <li>
+                              <strong>Makan Siang:</strong> {mealPlan.storelunch}
+                            </li>
+                            <li>
+                              <strong>Makan Malam:</strong> {mealPlan.storedinner}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+                return null;
+              })}
+            </div>
+          ) : (
+            <p className="text-center">Tidak ada meal plan untuk hari ini.</p>
+          )}
+        </div>
       </div>
-    </div>
     </>
   );
 }
