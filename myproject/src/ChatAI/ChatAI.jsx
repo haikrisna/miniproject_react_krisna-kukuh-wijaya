@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import ReactMarkdown from "react-markdown";
-import NavbarComponent from "../LandingPage/NavbarComponent";
+import NavbarComponent from "../component/NavbarComponent";
 
 function ChatAI() {
   const [inputUser, setInputUser] = useState("");
   const [history, setHistory] = useState([
     {
       role: "user",
-      parts: [{ text: "nama saya krisna, kamu siapa ?" }],
+      parts: [{ text: "Berikan pesan kepada Archiwaste!" }],
     },
     {
       role: "model",
@@ -78,7 +78,6 @@ function ChatAI() {
         }}
       >
         {/* Header */}
-
 
         {/* Chat Body */}
         <div

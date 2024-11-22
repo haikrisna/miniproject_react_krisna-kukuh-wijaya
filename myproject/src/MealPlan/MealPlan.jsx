@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import NavbarComponent from "../LandingPage/NavbarComponent";
+import NavbarComponent from "../component/NavbarComponent";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -94,7 +94,9 @@ export default function MealPlan() {
             .map((plan) =>
               plan.storeID === editID ? { ...plan, ...updatedMealPlan } : plan
             )
-            .sort((a, b) => new Date(a.storecreatedAt) - new Date(b.storecreatedAt)) // Urutkan ulang
+            .sort(
+              (a, b) => new Date(a.storecreatedAt) - new Date(b.storecreatedAt)
+            ) // Urutkan ulang
         );
 
         setEditID(null);
@@ -158,7 +160,9 @@ export default function MealPlan() {
       setMealPlansList(
         mealPlansList
           .filter((plan) => plan.storeID !== id)
-          .sort((a, b) => new Date(a.storecreatedAt) - new Date(b.storecreatedAt)) // Urutkan ulang
+          .sort(
+            (a, b) => new Date(a.storecreatedAt) - new Date(b.storecreatedAt)
+          ) // Urutkan ulang
       );
     } catch (error) {
       console.error("Error deleting meal plan:", error);

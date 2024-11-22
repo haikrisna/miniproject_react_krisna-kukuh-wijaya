@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import NavbarComponent from "../LandingPage/NavbarComponent";
-import Swal from 'sweetalert2';
+import NavbarComponent from "../component/NavbarComponent";
+import Swal from "sweetalert2";
 
 export default function Reminder() {
   const [mealPlans, setMealPlans] = useState([]);
@@ -29,12 +29,14 @@ export default function Reminder() {
       const currentTime = now.toTimeString().slice(0, 5); // Format HH:mm
 
       mealPlans.forEach((mealPlan) => {
-        const planDate = new Date(mealPlan.storecreatedAt).toISOString().split("T")[0];
+        const planDate = new Date(mealPlan.storecreatedAt)
+          .toISOString()
+          .split("T")[0];
 
         if (planDate === currentDate) {
           const reminders = [
             { time: "09:08", meal: mealPlan.storebreakfeast }, // Jam 7:00
-            { time: "11:05", meal: mealPlan.storelunch }, // Jam 11:00
+            { time: "11:59", meal: mealPlan.storelunch }, // Jam 11:00
             { time: "18:30", meal: mealPlan.storedinner }, // Jam 18:00
           ];
 
@@ -92,13 +94,16 @@ export default function Reminder() {
                           </h5>
                           <ul className="list-unstyled">
                             <li>
-                              <strong>Sarapan:</strong> {mealPlan.storebreakfeast}
+                              <strong>Sarapan:</strong>{" "}
+                              {mealPlan.storebreakfeast}
                             </li>
                             <li>
-                              <strong>Makan Siang:</strong> {mealPlan.storelunch}
+                              <strong>Makan Siang:</strong>{" "}
+                              {mealPlan.storelunch}
                             </li>
                             <li>
-                              <strong>Makan Malam:</strong> {mealPlan.storedinner}
+                              <strong>Makan Malam:</strong>{" "}
+                              {mealPlan.storedinner}
                             </li>
                           </ul>
                         </div>

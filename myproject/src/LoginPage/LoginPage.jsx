@@ -13,7 +13,7 @@ export default function LoginPage({ setIsLoggedIn }) {
   const handleLogin = (event) => {
     event.preventDefault();
 
-    const dummyUser = { username: 'krisna', password: 'krisna123' };
+    const dummyUser = { username: 'krisnakukuh@gmail.com', password: 'krisna123' };
     const user = JSON.parse(localStorage.getItem('user'));
 
     if (user && user.username === username && user.password === password) {
