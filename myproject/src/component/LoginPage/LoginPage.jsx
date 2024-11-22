@@ -8,27 +8,36 @@ export default function LoginPage({ setIsLoggedIn }) {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+  
 
   const handleLogin = (event) => {
     event.preventDefault();
 
     const dummyUser = { username: 'krisna', password: 'krisna123' };
+    const user = JSON.parse(localStorage.getItem('user'));
 
-    if (username === dummyUser.username && password === dummyUser.password) {
+    if (user && user.username === username && user.password === password) {
+      localStorage.setItem('isLoggedIn', 'true');
       setIsLoggedIn(true); // Update state login
       navigate('/mealplan');
       Swal.fire({
         title: "Anda berhasil login!",
-        text: `Silahkan nikmati fitur kami`,
+        text: `silahkan nikmati fitur kami`,
         icon: "success",
       });
+    } else if (username === dummyUser.username && password === dummyUser.password) {
+      localStorage.setItem('user', JSON.stringify(dummyUser));
+      localStorage.setItem('isLoggedIn', 'true');
+      setIsLoggedIn(true); // Update state login
+      navigate('/mealplan');
     } else {
       setErrorMessage('Username atau password tidak tepat');
       Swal.fire({
         title: "Username atau password tidak tepat",
-        text: `Silahkan masukan dengan benar`,
+        text: `silahkan masukan dengan benar`,
         icon: "warning",
       });
+      
     }
   };
 
