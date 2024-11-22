@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import ReactMarkdown from "react-markdown"; // Import ReactMarkdown
-import { data } from "./data"; // Sesuaikan path jika perlu
+import ReactMarkdown from "react-markdown";
 import NavbarComponent from "../LandingPage/NavbarComponent";
 
 function ChatAI() {
   const [inputUser, setInputUser] = useState("");
-  const [response, setResponse] = useState("default response");
-  const [dataState, setDataState] = useState(data);
   const [history, setHistory] = useState([
     {
       role: "user",
@@ -15,65 +12,54 @@ function ChatAI() {
     },
     {
       role: "model",
-      parts: [{ text: "saya adalah CS Archiwaste: Aplikasi pengelola makanan untuk meminimalisir limbah" }],
+      parts: [
+        {
+          text: "saya adalah CS Archiwaste: Aplikasi pengelola makanan untuk meminimalisir limbah",
+        },
+      ],
     },
   ]);
 
   function handleChange(e) {
-    console.log("handle change");
     setInputUser(e.target.value);
   }
 
   // Api Key Gemini
   const apiKey = "AIzaSyBvSV3xSoQn0FuPZSLFFiJQ6RkZlfJE5zo";
 
-  // Inisialisasi GooglGeneratieAI
+  // Inisialisasi GoogleGenerativeAI
   const genAI = new GoogleGenerativeAI(apiKey);
 
-  // dapatkan model yang akan digunakan (gemini)
+  // Dapatkan model yang akan digunakan (gemini)
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash-latest",
   });
 
-  // Settingan AI
   const generationConfig = {
     maxOutputTokens: 1000,
-    temperature: 1, // Kreatifitas dari AI
+    temperature: 1,
   };
 
-  // Mengarahkan ke gemini
   async function handlePromptSubmit() {
-    console.log("input user = ", inputUser);
     try {
+      const userMessage = { role: "user", parts: [{ text: inputUser }] };
+
+      setHistory((prevData) => [...prevData, userMessage]);
+
       const chatSession = model.startChat({
         generationConfig,
-        history: history,
+        history: [...history, userMessage],
       });
 
-      let promptDefault = `Kamu harus menjawab dengan sopan. Berikut adalah data yang ada: ${JSON.stringify(
-        dataState,
-        null,
-        2
-      )}. 
-Tidak boleh menjawab di luar dari data dan history yang diberikan. bahwa saya adalah Krisna.dengan history percakapan${JSON.stringify(
-        history,
-        null,
-        2
-      )}. Berikut inputan pengguna: ${inputUser}`;
-
-      // Kirim pesan ke model dan ambil respons
       const result = await chatSession.sendMessage(inputUser);
-      console.log(result.response.text());
 
-      // Update respons
-      setResponse(result.response.text());
+      const aiMessage = {
+        role: "model",
+        parts: [{ text: result.response.text() }],
+      };
+      setHistory((prevData) => [...prevData, aiMessage]);
 
-      // Tambahkan pada history state
-      setHistory((prevData) => [
-        ...prevData,
-        { role: "user", parts: [{ text: inputUser }] },
-        { role: "model", parts: [{ text: result.response.text() }] },
-      ]);
+      setInputUser("");
     } catch (error) {
       console.error(error);
     }
@@ -81,27 +67,90 @@ Tidak boleh menjawab di luar dari data dan history yang diberikan. bahwa saya ad
 
   return (
     <>
-      <NavbarComponent/>
-      <h1>Archiwaste AI</h1>
-      <input type="text" onChange={handleChange} />
-      <button onClick={handlePromptSubmit} type="button">
-        Submit
-      </button>
+      <NavbarComponent />
+      <div
+        className="container-fluid px-0"
+        style={{
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          marginTop: "80px", // Memberikan ruang untuk navbar
+        }}
+      >
+        {/* Header */}
 
-      {/* Menampilkan respons AI dengan react-markdown */}
-      <div className="response">
-        <ReactMarkdown>{response}</ReactMarkdown>
+
+        {/* Chat Body */}
+        <div
+          className="flex-grow-1"
+          style={{
+            backgroundColor: "#ffffff",
+            overflowY: "auto",
+            padding: "15px 0",
+          }}
+        >
+          <ul className="list-unstyled px-3">
+            {history.map((data, index) => (
+              <li
+                key={index}
+                className={`mb-3 ${
+                  data.role === "user" ? "text-end" : "text-start"
+                }`}
+                style={{
+                  textAlign: data.role === "user" ? "right" : "left",
+                }}
+              >
+                <div
+                  className={`bubble-chat p-3 rounded ${
+                    data.role === "user"
+                      ? "bg-success text-white"
+                      : "bg-light text-dark"
+                  }`}
+                  style={{
+                    display: "inline-block",
+                    maxWidth: "60%", // Lebar maksimal bubble
+                    wordWrap: "break-word", // Mengatasi teks panjang
+                    marginRight: data.role === "user" ? "0" : "auto",
+                    marginLeft: data.role === "user" ? "auto" : "0",
+                  }}
+                >
+                  <ReactMarkdown>{data.parts[0].text}</ReactMarkdown>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Footer Input */}
+        <div
+          className="p-3 bg-white border-top"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            position: "sticky",
+            bottom: "0",
+            left: "0",
+            right: "0",
+            zIndex: 1000,
+          }}
+        >
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Tulis pesan Anda..."
+            onChange={handleChange}
+            value={inputUser}
+          />
+          <button
+            className="btn btn-success"
+            type="button"
+            onClick={handlePromptSubmit}
+          >
+            Kirim
+          </button>
+        </div>
       </div>
-
-      {/* Menampilkan history percakapan */}
-      <ul>
-        {history.map((data, index) => (
-          <div key={index}>
-            <strong>{data.role === "user" ? "User" : "AI"}</strong>{" "}
-            {data.parts[0].text}
-          </div>
-        ))}
-      </ul>
     </>
   );
 }

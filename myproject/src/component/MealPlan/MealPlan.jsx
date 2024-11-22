@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavbarComponent from "../LandingPage/NavbarComponent";
 import axios from "axios";
-import FooterComponent from "../LandingPage/FooterComponent";
+import Swal from "sweetalert2";
 
 export default function MealPlan() {
   const [mealPlan, setMealPlan] = useState({
@@ -33,7 +33,16 @@ export default function MealPlan() {
     const fetchMealPlans = async () => {
       try {
         const response = await axios.get(API_URL);
-        setMealPlansList(response.data);
+
+        // Urutkan meal plans berdasarkan tanggal terdekat ke terjauh
+        const sortedPlans = response.data.sort((a, b) => {
+          const dateA = new Date(a.storecreatedAt);
+          const dateB = new Date(b.storecreatedAt);
+
+          return dateA - dateB; // Ascending order
+        });
+
+        setMealPlansList(sortedPlans);
       } catch (error) {
         console.error("Error fetching meal plans:", error);
       }
@@ -81,9 +90,11 @@ export default function MealPlan() {
         await axios.put(`${API_URL}/${editID}`, updatedMealPlan);
 
         setMealPlansList(
-          mealPlansList.map((plan) =>
-            plan.storeID === editID ? { ...plan, ...updatedMealPlan } : plan
-          )
+          mealPlansList
+            .map((plan) =>
+              plan.storeID === editID ? { ...plan, ...updatedMealPlan } : plan
+            )
+            .sort((a, b) => new Date(a.storecreatedAt) - new Date(b.storecreatedAt)) // Urutkan ulang
         );
 
         setEditID(null);
@@ -103,7 +114,11 @@ export default function MealPlan() {
 
         const response = await axios.post(API_URL, newMealPlan);
 
-        setMealPlansList([...mealPlansList, response.data]);
+        setMealPlansList(
+          [...mealPlansList, response.data].sort(
+            (a, b) => new Date(a.storecreatedAt) - new Date(b.storecreatedAt)
+          )
+        );
       } catch (error) {
         console.error("Error submitting meal plan:", error);
       }
@@ -114,6 +129,12 @@ export default function MealPlan() {
       breakfast: "",
       lunch: "",
       dinner: "",
+    });
+
+    Swal.fire({
+      title: "Jadwal berhasil ditambahkan!",
+      text: `Jangan lupa untuk mengonsumsi makanan dengan baik`,
+      icon: "success",
     });
   };
 
@@ -134,10 +155,19 @@ export default function MealPlan() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${API_URL}/${id}`);
-      setMealPlansList(mealPlansList.filter((plan) => plan.storeID !== id));
+      setMealPlansList(
+        mealPlansList
+          .filter((plan) => plan.storeID !== id)
+          .sort((a, b) => new Date(a.storecreatedAt) - new Date(b.storecreatedAt)) // Urutkan ulang
+      );
     } catch (error) {
       console.error("Error deleting meal plan:", error);
     }
+    Swal.fire({
+      title: "Jadwal berhasil dihapus!",
+      text: `Silahkan input makanan ketika anda membutuhkan!`,
+      icon: "success",
+    });
   };
 
   return (
@@ -233,56 +263,46 @@ export default function MealPlan() {
             </form>
           </div>
 
+          {/* Kolom kanan: Daftar Meal Plan */}
           <div className="col-md-6">
             <div
               className="mt-4"
               style={{ height: "400px", overflowY: "scroll" }}
             >
-              {/* <h3 className="text-center">Daftar Meal Plan</h3> */}
               <div className="d-flex flex-column gap-3">
                 {mealPlansList.map((plan) => (
                   <div className="card" key={plan.storeID}>
                     <div className="card-body">
-                      {/* Tanggal */}
                       <h5 className="card-title fw-bold">
                         {plan.storecreatedAt}
                       </h5>
-
-                      {/* Makanan: Sarapan, Makan Siang, Makan Malam */}
                       <div className="d-flex justify-content-between">
                         <p className="mb-1">
-                          <strong>Breakfast:</strong> {plan.storebreakfeast}
+                          <strong>Sarapan:</strong> {plan.storebreakfeast}
                         </p>
                         <p className="mb-1">
-                          <strong>Lunch:</strong> {plan.storelunch}
+                          <strong>Makan Siang:</strong> {plan.storelunch}
                         </p>
                         <p className="mb-1">
-                          <strong>Dinner:</strong> {plan.storedinner}
+                          <strong>Makan Malam:</strong> {plan.storedinner}
+                        </p>
+                        <p className="mb-1">
+                          <strong>Kalori:</strong> {plan.storecalories}
                         </p>
                       </div>
-
-                      {/* Total Kalori dan Tombol */}
-                      <div className="d-flex justify-content-between align-items-center mt-3">
-                        {/* Total Kalori */}
-                        <p className="fw-bold mb-0">
-                          Total Calories: {plan.storecalories}
-                        </p>
-
-                        {/* Tombol */}
-                        <div>
-                          <button
-                            className="btn btn-warning btn-sm me-2"
-                            onClick={() => handleEdit(plan.storeID)}
-                          >
-                            Edit
-                          </button>
-                          <button
-                            className="btn btn-danger btn-sm"
-                            onClick={() => handleDelete(plan.storeID)}
-                          >
-                            Hapus
-                          </button>
-                        </div>
+                      <div className="d-flex justify-content-end gap-2">
+                        <button
+                          className="btn btn-warning btn-sm me-2"
+                          onClick={() => handleEdit(plan.storeID)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() => handleDelete(plan.storeID)}
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
                   </div>

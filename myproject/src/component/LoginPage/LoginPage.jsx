@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Swal from 'sweetalert2';
 
 export default function LoginPage({ setIsLoggedIn }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+  
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -18,13 +20,24 @@ export default function LoginPage({ setIsLoggedIn }) {
       localStorage.setItem('isLoggedIn', 'true');
       setIsLoggedIn(true); // Update state login
       navigate('/mealplan');
+      Swal.fire({
+        title: "Anda berhasil login!",
+        text: `silahkan nikmati fitur kami`,
+        icon: "success",
+      });
     } else if (username === dummyUser.username && password === dummyUser.password) {
       localStorage.setItem('user', JSON.stringify(dummyUser));
       localStorage.setItem('isLoggedIn', 'true');
       setIsLoggedIn(true); // Update state login
       navigate('/mealplan');
     } else {
-      setErrorMessage('Invalid username or password');
+      setErrorMessage('Username atau password tidak tepat');
+      Swal.fire({
+        title: "Username atau password tidak tepat",
+        text: `silahkan masukan dengan benar`,
+        icon: "warning",
+      });
+      
     }
   };
 

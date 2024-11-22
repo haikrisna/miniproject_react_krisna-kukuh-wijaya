@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NavbarComponent from "../LandingPage/NavbarComponent";
+import Swal from 'sweetalert2';
 
 export default function Reminder() {
   const [mealPlans, setMealPlans] = useState([]);
@@ -32,15 +33,20 @@ export default function Reminder() {
 
         if (planDate === currentDate) {
           const reminders = [
-            { time: "07:00", meal: mealPlan.storebreakfeast }, // Jam 7:00
-            { time: "11:00", meal: mealPlan.storelunch }, // Jam 11:00
-            { time: "23:37", meal: mealPlan.storedinner }, // Jam 18:00
+            { time: "09:08", meal: mealPlan.storebreakfeast }, // Jam 7:00
+            { time: "11:05", meal: mealPlan.storelunch }, // Jam 11:00
+            { time: "18:30", meal: mealPlan.storedinner }, // Jam 18:00
           ];
 
           reminders.forEach(({ time, meal }) => {
             console.log(`Current time: ${currentTime}, Reminder time: ${time}`); // Debug
             if (currentTime === time) {
-              alert(`Pengingat: Saatnya makan ${meal}!`);
+              // alert(`Pengingat: Saatnya makan ${meal}!`);
+              Swal.fire({
+                title: "Hi Krisna!",
+                text: `Menu sekarang adalah waktumu untuk makan ${meal}`,
+                icon: "warning",
+              });
             }
           });
         }
