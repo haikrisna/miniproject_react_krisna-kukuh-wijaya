@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -7,7 +7,6 @@ import LandingPage from './component/LandingPage/LandingPage';
 import MealPlan from './component/MealPlan/MealPlan';
 import ChatAI from './component/ChatAI/ChatAI';
 import Reminder from './component/MealPlan/Reminder';
-import Swal from 'sweetalert2';
 
 // Komponen ProtectedRoute
 const ProtectedRoute = ({ isLoggedIn, children }) => {
@@ -17,12 +16,6 @@ const ProtectedRoute = ({ isLoggedIn, children }) => {
 function App() {
   // State untuk melacak status login
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    // Cek status login dari localStorage
-    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    setIsLoggedIn(loggedIn);
-  }, []);
 
   return (
     <Router>
