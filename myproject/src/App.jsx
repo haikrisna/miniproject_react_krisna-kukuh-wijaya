@@ -36,7 +36,9 @@ function App() {
 
   return (
     <Router>
-      <NavbarComponent isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+      {location.pathname !== "/login" && (
+        <NavbarComponent isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+      )}
       <Routes>
         {/* Halaman Login */}
         <Route
@@ -46,7 +48,6 @@ function App() {
 
         {/* Halaman LandingPage (Home) */}
         <Route path="/" element={<LandingPage isLoggedIn={isLoggedIn} />} />
-
 
         {/* Halaman yang memerlukan login */}
         <Route
@@ -75,7 +76,10 @@ function App() {
         />
 
         {/* Redirect untuk rute yang tidak ditemukan */}
-        <Route path="*" element={<Navigate to={isLoggedIn ? "/" : "/login"} />} />
+        <Route
+          path="*"
+          element={<Navigate to={isLoggedIn ? "/" : "/login"} />}
+        />
       </Routes>
     </Router>
   );

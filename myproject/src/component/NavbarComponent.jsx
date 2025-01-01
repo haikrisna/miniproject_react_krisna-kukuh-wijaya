@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import logoprofile from "../assets/heroimage.png";
 
 export default function NavbarComponent({ isLoggedIn, handleLogout }) {
   const navigate = useNavigate();
@@ -69,13 +70,14 @@ export default function NavbarComponent({ isLoggedIn, handleLogout }) {
             {isLoggedIn ? (
               <div className="d-flex align-items-center">
                 <img
-                  src="https://www.svgrepo.com/show/157818/profile.svg"
+                  src={logoprofile}
                   alt="Profile"
                   width="30"
                   height="30"
                   style={{ cursor: "pointer" }}
                   onClick={handleLogout}
                   title="Click to Logout"
+                  className=" rounded-circle"
                 />
               </div>
             ) : (

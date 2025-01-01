@@ -7,8 +7,10 @@ import image3 from "./assets/image3.png";
 import zerowaste from "./assets/zerowaste.png";
 import foodwaste from "./assets/food-waste.jpg";
 import aboutimage from "./assets/about_us.png";
+import { useNavigate } from "react-router-dom";
 
 export default function HeroSection() {
+  const navigate = useNavigate();
   return (
     <div>
       {/* Hero Section */}
@@ -27,7 +29,10 @@ export default function HeroSection() {
                 Bantu kurangi sampah makanan bersama. Setiap langkah kecil
                 memiliki dampak besar untuk masa depan.
               </p>
-              <a href="#" className="btn btn-success btn-lg">
+              <a
+                className="btn btn-success btn-lg"
+                onClick={() => navigate("/login")}
+              >
                 Get Started
               </a>
             </div>
