@@ -64,7 +64,6 @@ export default function Reminder() {
 
   return (
     <>
-      <NavbarComponent />
       <div className="container py-4" style={{ marginTop: "80px" }}>
         {/* Header */}
         <h1 className="text-center mb-4">Reminder</h1>
