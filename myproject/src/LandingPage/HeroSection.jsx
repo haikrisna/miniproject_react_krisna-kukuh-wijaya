@@ -15,22 +15,39 @@ export default function HeroSection() {
     <div>
       {/* Hero Section */}
       <div
-        className="hero-section bg-light py-5"
+        className="hero-section bg-success position-relative"
         style={{ minHeight: "100vh" }}
       >
+        {/* Wave SVG */}
+        <div className="wave-container position-absolute bottom-0 left-0 w-100">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 320"
+            preserveAspectRatio="none"
+            className="w-100"
+            style={{ display: "block" }}
+          >
+            <path
+              fill="#ffffff"
+              fillOpacity="1"
+              d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            ></path>
+          </svg>
+        </div>
+
         <div className="container" style={{ paddingTop: "140px" }}>
           <div className="row align-items-center" style={{ height: "100%" }}>
             {/* Left Text Section */}
             <div className="col-md-6 mb-4 mb-md-0">
-              <h1 className="display-4 fw-bold text-success">
+              <h1 className="display-4 fw-bold text-white">
                 Welcome to Archiwaste
               </h1>
-              <p className="lead text-dark">
+              <p className="lead text-white">
                 Bantu kurangi sampah makanan bersama. Setiap langkah kecil
                 memiliki dampak besar untuk masa depan.
               </p>
               <a
-                className="btn btn-success btn-lg"
+                className="btn btn-light btn-lg text-success"
                 onClick={() => navigate("/login")}
               >
                 Get Started
@@ -42,7 +59,7 @@ export default function HeroSection() {
                 src={heroimage}
                 alt="Hero"
                 className="img-fluid rounded shadow"
-                style={{ maxHeight: "80vh", objectFit: "cover" }} // Membuat gambar sesuai dengan ukuran layar
+                style={{ maxHeight: "80vh", objectFit: "cover" }}
               />
             </div>
           </div>

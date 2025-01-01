@@ -34,7 +34,7 @@ export default function NavbarComponent({ isLoggedIn, handleLogout }) {
               <li className="nav-item">
                 <a
                   className="nav-link text-dark"
-                  onClick={() => navigate("/landingpage")}
+                  onClick={() => navigate("/")}
                   role="button"
                 >
                   Home
