@@ -19,7 +19,7 @@ export default function LoginPage({ setIsLoggedIn }) {
     if (user && user.username === username && user.password === password) {
       localStorage.setItem('isLoggedIn', 'true');
       setIsLoggedIn(true); // Update state login
-      navigate('/mealplan');
+      navigate('/');
       Swal.fire({
         title: "Anda berhasil login!",
         text: `silahkan nikmati fitur kami`,

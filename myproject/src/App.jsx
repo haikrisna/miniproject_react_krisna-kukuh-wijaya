@@ -12,18 +12,31 @@ import LandingPage from "./LandingPage/LandingPage";
 import MealPlan from "./MealPlan/MealPlan";
 import ChatAI from "./ChatAI/ChatAI";
 import Reminder from "./Reminder/Reminder";
+import NavbarComponent from "./component/NavbarComponent";
 
 // Komponen ProtectedRoute
 const ProtectedRoute = ({ isLoggedIn, children }) => {
-  return isLoggedIn ? children : <Navigate to="/login" />;
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
 };
 
 function App() {
   // State untuk melacak status login
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    () => localStorage.getItem("isLoggedIn") === "true"
+  );
+
+  // Fungsi untuk logout
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false);
+  };
 
   return (
     <Router>
+      <NavbarComponent isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       <Routes>
         {/* Halaman Login */}
         <Route
@@ -32,7 +45,8 @@ function App() {
         />
 
         {/* Halaman LandingPage (Home) */}
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage isLoggedIn={isLoggedIn} />} />
+
 
         {/* Halaman yang memerlukan login */}
         <Route
@@ -61,7 +75,7 @@ function App() {
         />
 
         {/* Redirect untuk rute yang tidak ditemukan */}
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Navigate to={isLoggedIn ? "/" : "/login"} />} />
       </Routes>
     </Router>
   );

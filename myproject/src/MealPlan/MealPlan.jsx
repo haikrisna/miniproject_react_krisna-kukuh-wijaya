@@ -176,7 +176,6 @@ export default function MealPlan() {
 
   return (
     <>
-      <NavbarComponent />
       <div className="container py-4" style={{ marginTop: "80px" }}>
         <h1 className="text-center mb-4">Meal Plan Input</h1>
         <div className="row">

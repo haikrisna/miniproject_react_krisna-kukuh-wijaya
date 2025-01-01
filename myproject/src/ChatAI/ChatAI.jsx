@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import ReactMarkdown from "react-markdown";
-import NavbarComponent from "../component/NavbarComponent";
 
 function ChatAI() {
   const [inputUser, setInputUser] = useState("");
@@ -67,7 +66,6 @@ function ChatAI() {
 
   return (
     <>
-      <NavbarComponent />
       <div
         className="container-fluid px-0"
         style={{
