@@ -24,7 +24,7 @@ function ChatAI() {
   }
 
   // Api Key Gemini
-  const apiKey = "AIzaSyBvSV3xSoQn0FuPZSLFFiJQ6RkZlfJE5zo";
+  const apiKey = "AIzaSyCj293bykAlQ7h8cG3s0rp-lP_Y-mX_k7I";
 
   // Inisialisasi GoogleGenerativeAI
   const genAI = new GoogleGenerativeAI(apiKey);
@@ -40,30 +40,44 @@ function ChatAI() {
   };
 
   async function handlePromptSubmit() {
-    try {
-      const userMessage = { role: "user", parts: [{ text: inputUser }] };
+    if (!inputUser.trim()) {
+      alert("Input tidak boleh kosong.");
+      return;
+    }
 
-      setHistory((prevData) => [...prevData, userMessage]);
+    try {
+      const dynamicPrompt = `Anda adalah asisten aplikasi Archiwaste. Tugas Anda adalah membantu pengguna meminimalisir limbah makanan. Berikut adalah permintaan pengguna: ${inputUser}`;
+
+      const userMessage = { role: "user", parts: [{ text: dynamicPrompt }] };
+
+      setHistory((prevData) => [
+        ...prevData,
+        { role: "user", parts: [{ text: inputUser }] },
+      ]);
 
       const chatSession = model.startChat({
         generationConfig,
         history: [...history, userMessage],
       });
 
-      const result = await chatSession.sendMessage(inputUser);
+      const result = await chatSession.sendMessage(dynamicPrompt);
 
+      const aiResponse =
+        result.response.text() || "Maaf, saya tidak dapat memberikan respons.";
       const aiMessage = {
         role: "model",
-        parts: [{ text: result.response.text() }],
+        parts: [{ text: aiResponse }],
       };
-      setHistory((prevData) => [...prevData, aiMessage]);
 
+      setHistory((prevData) => [...prevData, aiMessage]);
       setInputUser("");
+
+      console.log("AI Response:", aiResponse);
     } catch (error) {
-      console.error(error);
+      console.error("Error saat memproses prompt:", error);
+      alert("Terjadi kesalahan. Coba lagi nanti.");
     }
   }
-
   return (
     <>
       <div
