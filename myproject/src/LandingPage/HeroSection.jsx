@@ -1,12 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import heroimage from "./assets/heroimage.png";
-import image1 from "./assets/image1.jpg";
-import image2 from "./assets/image2.jpeg";
-import image3 from "./assets/image3.png";
-import zerowaste from "./assets/zerowaste.png";
-import foodwaste from "./assets/food-waste.jpg";
-import aboutimage from "./assets/about_us.png";
+import heroimage from "../assets/heroimage.png";
+import image1 from "../assets/image1.jpg";
+import image2 from "../assets/image2.jpeg";
+import image3 from "../assets/image3.png";
+import zerowaste from "../assets/zerowaste.png";
+import foodwaste from "../assets/food-waste.jpg";
+import aboutimage from "../assets/about_us.png";
 import { useNavigate } from "react-router-dom";
 
 export default function HeroSection() {
@@ -49,7 +49,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Section 1: FoOdwaste */}
+      {/* Section 1: Foodwaste */}
       <div className="container py-5">
         <div className="row align-items-center">
           {/* Left Placeholder for Image */}
@@ -63,19 +63,22 @@ export default function HeroSection() {
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: "8px",
+                overflow: "hidden", // Mencegah overflow
+                position: "relative", // Untuk memastikan tata letak tetap rapi
               }}
             >
               <img
                 src={foodwaste}
                 alt="Foodwaste"
                 style={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  objectFit: "cover", // Menjaga gambar tetap proporsional
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover", // Memastikan gambar mengisi seluruh area
                 }}
               />
             </div>
           </div>
+
           {/* Right Text */}
           <div className="col-md-6">
             <h2 className="fw-bold">Apa itu FOODWASTE?</h2>
@@ -135,15 +138,17 @@ export default function HeroSection() {
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: "8px",
+                overflow: "hidden", // Mencegah overflow
+                position: "relative", // Untuk memastikan tata letak tetap rapi
               }}
             >
               <img
                 src={zerowaste}
                 alt="Foodwaste"
                 style={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  objectFit: "cover", // Menjaga gambar tetap proporsional
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover", // Memastikan gambar mengisi seluruh area
                 }}
               />
             </div>
@@ -166,15 +171,17 @@ export default function HeroSection() {
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: "8px",
+                overflow: "hidden", // Mencegah overflow
+                position: "relative", // Untuk memastikan tata letak tetap rapi
               }}
             >
               <img
                 src={aboutimage}
                 alt="Foodwaste"
                 style={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  objectFit: "cover", // Menjaga gambar tetap proporsional
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover", // Memastikan gambar mengisi seluruh area
                 }}
               />
             </div>
