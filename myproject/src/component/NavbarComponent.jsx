@@ -1,9 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import logoprofile from "../assets/heroimage.png";
 
 export default function NavbarComponent({ isLoggedIn, handleLogout }) {
   const navigate = useNavigate();
+  const [showDropdown, setShowDropdown] = useState(false);
 
   return (
     <div>
@@ -68,17 +70,38 @@ export default function NavbarComponent({ isLoggedIn, handleLogout }) {
             </ul>
             {/* Kondisi berdasarkan status login */}
             {isLoggedIn ? (
-              <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center position-relative">
                 <img
                   src={logoprofile}
                   alt="Profile"
                   width="30"
                   height="30"
                   style={{ cursor: "pointer" }}
-                  onClick={handleLogout}
-                  title="Click to Logout"
-                  className=" rounded-circle"
+                  onClick={() => setShowDropdown(!showDropdown)} // Toggling dropdown
+                  title="Click to open menu"
+                  className="rounded-circle"
                 />
+
+                {showDropdown && (
+                  <div
+                    className="dropdown-menu show"
+                    style={{
+                      position: "absolute",
+                      top: "35px",
+                      right: "0",
+                      minWidth: "120px",
+                      padding: "5px 0",
+                    }}
+                  >
+                    <button
+                      className="dropdown-item"
+                      onClick={handleLogout}
+                      style={{ fontSize: "14px", padding: "5px 10px" }}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
               <div>

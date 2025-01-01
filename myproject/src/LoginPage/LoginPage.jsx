@@ -45,10 +45,10 @@ export default function LoginPage({ setIsLoggedIn }) {
     <div className="container d-flex justify-content-center align-items-center vh-100">
       <div className="card" style={{ width: '300px' }}>
         <div className="card-body">
-          <h2 className="text-center mb-4">Login</h2>
+          <h2 className="text-center mb-4 fw-bold text-success">Login</h2>
           <form onSubmit={handleLogin}>
             <div className="mb-3">
-              <label className="form-label">Username:</label>
+              <label className="form-label text-secondary">Username:</label>
               <input
                 type="text"
                 className="form-control"
@@ -58,7 +58,7 @@ export default function LoginPage({ setIsLoggedIn }) {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Password:</label>
+              <label className="form-label text-secondary">Password:</label>
               <input
                 type="password"
                 className="form-control"
@@ -67,7 +67,7 @@ export default function LoginPage({ setIsLoggedIn }) {
                 required
               />
             </div>
-            <button type="submit" className="btn btn-primary w-100">Login</button>
+            <button type="submit" className="btn btn-success w-100 fw-bold">Login</button>
             {errorMessage && <p className="text-danger text-center mt-2">{errorMessage}</p>}
           </form>
         </div>

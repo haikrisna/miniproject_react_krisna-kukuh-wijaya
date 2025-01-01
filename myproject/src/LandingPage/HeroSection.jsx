@@ -109,7 +109,7 @@ export default function HeroSection() {
       </div>
 
       {/* Section 2: Kenapa Archiwaste Berbeda */}
-      <div className="container py-5 bg-light">
+      <div className="container py-5 bg-light rounded-4">
         <div className="row align-items-center">
           {/* Left Text */}
           <div className="col-md-6">
