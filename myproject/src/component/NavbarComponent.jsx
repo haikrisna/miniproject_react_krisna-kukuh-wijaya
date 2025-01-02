@@ -7,6 +7,13 @@ export default function NavbarComponent({ isLoggedIn, handleLogout }) {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
 
+  const [activeMenu, setActiveMenu] = useState("/");
+
+  const handleNavigation = (path) => {
+    setActiveMenu(path);
+    navigate(path);
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
@@ -33,8 +40,10 @@ export default function NavbarComponent({ isLoggedIn, handleLogout }) {
             <ul className="navbar-nav mx-auto">
               <li className="nav-item">
                 <a
-                  className="nav-link text-dark"
-                  onClick={() => navigate("/")}
+                  className={`nav-link ${
+                    activeMenu === "/" ? "text-success" : "text-dark"
+                  }`}
+                  onClick={() => handleNavigation("/")}
                   role="button"
                 >
                   Home
@@ -42,8 +51,10 @@ export default function NavbarComponent({ isLoggedIn, handleLogout }) {
               </li>
               <li className="nav-item">
                 <a
-                  className="nav-link text-dark"
-                  onClick={() => navigate("/mealplan")}
+                  className={`nav-link ${
+                    activeMenu === "/mealplan" ? "text-success" : "text-dark"
+                  }`}
+                  onClick={() => handleNavigation("/mealplan")}
                   role="button"
                 >
                   Meal Plan
@@ -51,8 +62,10 @@ export default function NavbarComponent({ isLoggedIn, handleLogout }) {
               </li>
               <li className="nav-item">
                 <a
-                  className="nav-link text-dark"
-                  onClick={() => navigate("/chat")}
+                  className={`nav-link ${
+                    activeMenu === "/chat" ? "text-success" : "text-dark"
+                  }`}
+                  onClick={() => handleNavigation("/chat")}
                   role="button"
                 >
                   Chat AI
@@ -64,9 +77,13 @@ export default function NavbarComponent({ isLoggedIn, handleLogout }) {
             {isLoggedIn ? (
               <>
                 <div
-                  className="nav-item px-3"
+                  className={`nav-link px-3 ${
+                    activeMenu === "//mealplan/reminder"
+                      ? "text-success"
+                      : "text-dark"
+                  }`}
+                  onClick={() => handleNavigation("/mealplan/reminder")}
                   role="button"
-                  onClick={() => navigate("/mealplan/reminder")}
                 >
                   <svg
                     width="22"
