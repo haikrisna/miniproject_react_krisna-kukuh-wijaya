@@ -43,8 +43,8 @@ export default function HeroSection() {
                 Welcome to Archiwaste
               </h1>
               <p className="lead text-white">
-                Bantu kurangi sampah makanan bersama. Setiap langkah kecil
-                memiliki dampak besar untuk masa depan.
+                Bantu kurangi sampah makanan bersama! Setiap langkah kecil
+                memiliki dampak besar untuk masa depan kita....
               </p>
               <a
                 className="btn btn-light btn-lg text-success"
@@ -98,7 +98,7 @@ export default function HeroSection() {
 
           {/* Right Text */}
           <div className="col-md-6">
-            <h2 className="fw-bold">Apa itu FOODWASTE?</h2>
+            <h2 className="fw-bold text-success">Apa itu FOODWASTE?</h2>
             <p>
               Food waste adalah istilah untuk sisa makanan yang masih bisa
               dimakan, namun dibuang dan menjadi sampah. Food waste bisa terjadi
@@ -108,17 +108,17 @@ export default function HeroSection() {
               depan orang lain, Makanan yang sudah kedaluwarsa.
             </p>
             <ul className="list-unstyled">
-              <li className="mb-2">
-                ✅ <strong>Makanan Kedaluwarsa</strong>
+              <li className="mb-2" role="button">
+                ✅ <strong className=" text-success">Makanan Kedaluwarsa</strong>
               </li>
-              <li className="mb-2">
-                ✅ <strong>Sisa Makanan</strong>
+              <li className="mb-2" role="button">
+                ✅ <strong className=" text-success">Sisa Makanan</strong>
               </li>
-              <li className="mb-2">
-                ✅ <strong>Sayuran dan Buah Busuk</strong>
+              <li className="mb-2" role="button">
+                ✅ <strong className=" text-success">Sayuran dan Buah Busuk</strong>
               </li>
-              <li className="mb-2">
-                ✅ <strong>Overbuying</strong>
+              <li className="mb-2" role="button">
+                ✅ <strong className=" text-success">Overbuying</strong>
               </li>
             </ul>
           </div>
@@ -130,7 +130,7 @@ export default function HeroSection() {
         <div className="row align-items-center">
           {/* Left Text */}
           <div className="col-md-6">
-            <h2 className="fw-bold">Kenapa kita harus mengatasinya?</h2>
+            <h2 className="fw-bold text-success">Kenapa kita harus mengatasinya?</h2>
             <p>
               Food waste merupakan masalah yang perlu diatasi karena memiliki
               dampak buruk bagi lingkungan dan kelaparan. Sampah makanan yang
@@ -138,10 +138,10 @@ export default function HeroSection() {
               yang dapat merusak lapisan ozon dan menyebabkan pemanasan global.
             </p>
             <ul className="list-unstyled">
-              <li className="mb-2">🌏🔥 Emisi Gas Rumah Kaca</li>
-              <li className="mb-2">🌱💧 Pencemaran Air dan Tanah</li>
-              <li className="mb-2">📉 Kerugian Finansial</li>
-              <li className="mb-2">🤝 Masalah Kemanusiaan</li>
+              <li className="mb-2" role="button">🌏 <strong className=" text-success">Emisi Gas Rumah Kaca</strong></li>
+              <li className="mb-2" role="button">💧 <strong className=" text-success">Pencemaran Air dan Tanah</strong></li>
+              <li className="mb-2" role="button">📉 <strong className=" text-success">Kerugian Finansial</strong></li>
+              <li className="mb-2" role="button">🤝 <strong className=" text-success"> Masalah Kemanusiaan</strong></li>
             </ul>
           </div>
           {/* Right Placeholder for Image */}
@@ -207,16 +207,16 @@ export default function HeroSection() {
           {/* Left Image */}
 
           <div className="col-md-6">
-            <h2 className="fw-bold">About Us</h2>
+            <h2 className="fw-bold text-success">About Us</h2>
             <p>
-              Website kami memiliki fitur <strong>Mealplan</strong>, yang
+              Website kami memiliki fitur <strong className=" text-success">Mealplan</strong>, yang
               membantu Anda merencanakan kebutuhan makanan dengan efisien, serta
-              fitur <strong>chat dengan AI</strong>, yang siap memberikan solusi
+              fitur <strong className=" text-success">chat dengan AI</strong>, yang siap memberikan solusi
               praktis dan edukasi untuk membantu Anda mengurangi limbah makanan
               sehari-hari.
             </p>
             <p>
-              Bersama <strong>Archiwaste,</strong> mari kita wujudkan lingkungan
+              Bersama <strong className=" text-success">Archiwaste,</strong> mari kita wujudkan lingkungan
               yang lebih sehat dan berkelanjutan!
             </p>
           </div>
@@ -225,7 +225,7 @@ export default function HeroSection() {
 
       {/* Card Section for Food and Waste Information */}
       <div className="container py-5">
-        <h2 className="text-center mb-4">Makanan dan Limbah</h2>
+        <h2 className="text-center mb-4 fw-bold text-success">Makanan dan Limbah</h2>
         <div className="row">
           {/* Card 1 */}
           <div className="col-md-4">
@@ -236,8 +236,8 @@ export default function HeroSection() {
                   World Food Day: Dari kompos rumahan hingga budidaya maggot,
                   ‘Kesempatan kedua untuk sampah makanan’
                 </h5>
-                <p className="card-text">
-                  esklplor lebih banyak hal terkait pentingnya mengelola sampah
+                <p className="card-text text-secondary">
+                  Eksplor lebih banyak hal terkait pentingnya mengelola sampah
                   makanan
                 </p>
                 <a
@@ -258,8 +258,8 @@ export default function HeroSection() {
                 <h5 className="card-title">
                   Darurat! Sampah Makanan Orang RI Tembus Ratusan Triliun
                 </h5>
-                <p className="card-text">
-                  esklplor lebih banyak hal terkait pentingnya mengelola sampah
+                <p className="card-text text-secondary">
+                  Eksplor lebih banyak hal terkait pentingnya mengelola sampah
                   makanan
                 </p>
                 <a
@@ -280,8 +280,8 @@ export default function HeroSection() {
                 <h5 className="card-title">
                   Sejauh Mana Indonesia Darurat Sampah Makanan?
                 </h5>
-                <p className="card-text">
-                  esklplor lebih banyak hal terkait pentingnya mengelola sampah
+                <p className="card-text text-secondary">
+                  Ekslplor lebih banyak hal terkait pentingnya mengelola sampah
                   makanan
                 </p>
                 <a

@@ -181,10 +181,10 @@ export default function MealPlan() {
         <div className="container py-5" style={{ marginTop: "30px" }}>
           {/* Header Section */}
           <div className="text-center">
-            <h1 className=" fw-bold text-success">
+            <h4 className=" fw-bold text-success">
               Meal Plan Manager
-            </h1>
-            <p className="text-muted lead">
+            </h4>
+            <p className="text-muted small">
               Atur jadwal makan Anda untuk hidup yang lebih sehat
             </p>
           </div>
