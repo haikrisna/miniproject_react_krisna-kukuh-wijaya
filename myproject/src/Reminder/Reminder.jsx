@@ -64,58 +64,123 @@ export default function Reminder() {
 
   return (
     <>
-      <div className="container py-4" style={{ marginTop: "80px" }}>
-        {/* Header */}
-        <h1 className="text-center mb-4">Reminder</h1>
-
-        {/* Daftar Meal Plan */}
-        <div className="mt-4">
-          <h3 className="text-center mb-3">Daftar Makanan Hari Ini</h3>
-          {mealPlans.some(
-            (mealPlan) =>
-              new Date(mealPlan.storecreatedAt).toISOString().split("T")[0] ===
-              new Date().toISOString().split("T")[0]
-          ) ? (
-            <div className="row">
-              {mealPlans.map((mealPlan) => {
-                const date = new Date(mealPlan.storecreatedAt)
-                  .toISOString()
-                  .split("T")[0];
-                const today = new Date().toISOString().split("T")[0];
-
-                if (date === today) {
-                  return (
-                    <div key={mealPlan.storeID} className="col-md-6 mb-3">
-                      <div className="card h-100">
-                        <div className="card-body">
-                          <h5 className="card-title">
-                            <strong>{mealPlan.storecreatedAt}</strong>
-                          </h5>
-                          <ul className="list-unstyled">
-                            <li>
-                              <strong>Sarapan:</strong>{" "}
-                              {mealPlan.storebreakfeast}
-                            </li>
-                            <li>
-                              <strong>Makan Siang:</strong>{" "}
-                              {mealPlan.storelunch}
-                            </li>
-                            <li>
-                              <strong>Makan Malam:</strong>{" "}
-                              {mealPlan.storedinner}
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                }
-                return null;
-              })}
+      <div className="container py-5" style={{ marginTop: "30px" }}>
+        <div className="row justify-content-center">
+          <div className="col-12">
+            {/* Header dengan style yang lebih modern */}
+            <div className="text-center mb-4">
+              <h4 className="fw-bold text-success mb-1">
+                Meal Reminder
+              </h4>
+              <p className="text-muted small">Pengingat jadwal makan hari ini</p>
             </div>
-          ) : (
-            <p className="text-center">Tidak ada meal plan untuk hari ini.</p>
-          )}
+
+            {/* Card utama dengan shadow lembut */}
+            <div className="card border-0 shadow-sm">
+              <div className="card-body p-2">
+                {mealPlans.some(
+                  (mealPlan) =>
+                    new Date(mealPlan.storecreatedAt).toISOString().split("T")[0] ===
+                    new Date().toISOString().split("T")[0]
+                ) ? (
+                  mealPlans.map((mealPlan) => {
+                    const date = new Date(mealPlan.storecreatedAt)
+                      .toISOString()
+                      .split("T")[0];
+                    const today = new Date().toISOString().split("T")[0];
+
+                    if (date === today) {
+                      const meals = [
+                        {
+                          icon: "☀️",
+                          title: "Sarapan",
+                          time: "09:08",
+                          meal: mealPlan.storebreakfeast
+                        },
+                        {
+                          icon: "🌞",
+                          title: "Makan Siang",
+                          time: "11:59",
+                          meal: mealPlan.storelunch
+                        },
+                        {
+                          icon: "🌙",
+                          title: "Makan Malam",
+                          time: "18:30",
+                          meal: mealPlan.storedinner
+                        }
+                      ];
+
+                      return (
+                        <div key={mealPlan.storeID}>
+                          {meals.map((mealItem, index) => {
+                            const now = new Date();
+                            const currentHour = now.getHours();
+                            const currentMinute = now.getMinutes();
+                            const [mealHour, mealMinute] = mealItem.time.split(":").map(Number);
+                            
+                            const isActive = 
+                              currentHour === mealHour && 
+                              Math.abs(currentMinute - mealMinute) <= 30;
+                            
+                            const isPast = 
+                              currentHour > mealHour || 
+                              (currentHour === mealHour && currentMinute > mealMinute + 30);
+
+                            return (
+                              <div 
+                                key={index} 
+                                className={`card border-0 shadow-sm mb-3 ${
+                                  isActive ? 'border-start border-success border-4' : ''
+                                }`}
+                              >
+                                <div className="card-body p-3">
+                                  <div className="row align-items-center">
+                                    <div className="col-auto">
+                                      <span className="fs-4 me-3">{mealItem.icon}</span>
+                                    </div>
+                                    <div className="col">
+                                      <div className="d-flex justify-content-between align-items-center mb-1">
+                                        <h6 className="mb-0 fw-bold">{mealItem.title}</h6>
+                                        <span className={`badge ${
+                                          isActive ? 'bg-success' : 
+                                          isPast ? 'bg-secondary' : 
+                                          'bg-success bg-opacity-25 text-success'
+                                        }`}>
+                                          {isActive ? 'Waktunya Makan!' : 
+                                           isPast ? 'Selesai' : 
+                                           'Terjadwal'}
+                                        </span>
+                                      </div>
+                                      <div className="text-muted small mb-1">
+                                        <i className="bi bi-clock me-1"></i>
+                                        {mealItem.time}
+                                      </div>
+                                      <div className="mt-2 text-dark">
+                                        {mealItem.meal}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      );
+                    }
+                    return null;
+                  })
+                ) : (
+                  <div className="text-center p-4">
+                    <div className="text-muted">
+                      <i className="bi bi-calendar-x fs-4 mb-2"></i>
+                      <p className="mb-0">Tidak ada meal plan untuk hari ini.</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

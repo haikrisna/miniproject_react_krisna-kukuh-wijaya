@@ -13,7 +13,7 @@ export default function MealPlan() {
 
   const [mealPlansList, setMealPlansList] = useState([]);
   const [foods, setFoods] = useState([]);
-  const [editID, setEditID] = useState(null); // ID untuk meal plan yang sedang diedit
+  const [editID, setEditID] = useState(null);
 
   const API_URL = "https://673d82f30118dbfe8607827b.mockapi.io/storemealplan";
 
@@ -176,140 +176,197 @@ export default function MealPlan() {
 
   return (
     <>
-      <div className="container py-4" style={{ marginTop: "80px" }}>
-        <h1 className="text-center mb-4">Meal Plan Input</h1>
-        <div className="row">
-          {/* Kolom kiri: Form Input */}
-          <div className="col-md-6">
-            <form onSubmit={handleSubmit} className="sticky-top">
-              <div className="mb-3">
-                <label htmlFor="date" className="form-label">
-                  Tanggal
-                </label>
-                <input
-                  type="date"
-                  id="date"
-                  name="date"
-                  className="form-control"
-                  value={mealPlan.date}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="breakfast" className="form-label">
-                  Sarapan
-                </label>
-                <select
-                  id="breakfast"
-                  name="breakfast"
-                  className="form-select"
-                  value={mealPlan.breakfast}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Pilih Menu Sarapan</option>
-                  {foods.map((food) => (
-                    <option key={food.id} value={food.food}>
-                      {food.food}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="lunch" className="form-label">
-                  Makan Siang
-                </label>
-                <select
-                  id="lunch"
-                  name="lunch"
-                  className="form-select"
-                  value={mealPlan.lunch}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Pilih Menu Makan Siang</option>
-                  {foods.map((food) => (
-                    <option key={food.id} value={food.food}>
-                      {food.food}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="dinner" className="form-label">
-                  Makan Malam
-                </label>
-                <select
-                  id="dinner"
-                  name="dinner"
-                  className="form-select"
-                  value={mealPlan.dinner}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Pilih Menu Makan Malam</option>
-                  {foods.map((food) => (
-                    <option key={food.id} value={food.food}>
-                      {food.food}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <button type="submit" className="btn btn-success w-100">
-                {editID ? "Update Meal Plan" : "Tambahkan Meal Plan"}
-              </button>
-            </form>
+      {/* Parent container with full height */}
+      <div className="bg-light min-vh-100">
+        <div className="container py-5" style={{ marginTop: "30px" }}>
+          {/* Header Section */}
+          <div className="text-center">
+            <h4 className=" fw-bold text-success">
+              Meal Plan Manager
+            </h4>
+            <p className="text-muted small">
+              Atur jadwal makan Anda untuk hidup yang lebih sehat
+            </p>
           </div>
 
-          {/* Kolom kanan: Daftar Meal Plan */}
-          <div className="col-md-6">
-            <div
-              className="mt-4"
-              style={{ height: "400px", overflowY: "scroll" }}
-            >
-              <div className="d-flex flex-column gap-3">
-                {mealPlansList.map((plan) => (
-                  <div className="card" key={plan.storeID}>
-                    <div className="card-body">
-                      <h5 className="card-title fw-bold">
-                        {plan.storecreatedAt}
-                      </h5>
-                      <div className="d-flex justify-content-between">
-                        <p className="mb-1">
-                          <strong>Sarapan:</strong> {plan.storebreakfeast}
-                        </p>
-                        <p className="mb-1">
-                          <strong>Makan Siang:</strong> {plan.storelunch}
-                        </p>
-                        <p className="mb-1">
-                          <strong>Makan Malam:</strong> {plan.storedinner}
-                        </p>
-                        <p className="mb-1">
-                          <strong>Kalori:</strong> {plan.storecalories}
-                        </p>
-                      </div>
-                      <div className="d-flex justify-content-end gap-2">
-                        <button
-                          className="btn btn-warning btn-sm me-2"
-                          onClick={() => handleEdit(plan.storeID)}
+          <div className="row g-4">
+            {/* Form Section - Fixed Position */}
+            <div className="col-md-6">
+              <div
+                className="card shadow-sm border-0 sticky-top rounded-4"
+                style={{ top: "100px" }}
+              >
+                <div className="card-body p-4">
+                  <h3 className="card-title text-success mb-4 fw-semibold">
+                    Input Mealplan
+                  </h3>
+                  <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                      <label className="form-label fw-semibold">Tanggal</label>
+                      <input
+                        type="date"
+                        name="date"
+                        className="form-control form-control-lg"
+                        value={mealPlan.date}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="form-label fw-semibold">Sarapan</label>
+                      <select
+                        name="breakfast"
+                        className="form-select form-select-lg"
+                        value={mealPlan.breakfast}
+                        onChange={handleChange}
+                        required
+                      >
+                        <option value="">Pilih Menu Sarapan</option>
+                        {foods.map((food) => (
+                          <option key={food.id} value={food.food}>
+                            {food.food}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="form-label fw-semibold">
+                        Makan Siang
+                      </label>
+                      <select
+                        name="lunch"
+                        className="form-select form-select-lg"
+                        value={mealPlan.lunch}
+                        onChange={handleChange}
+                        required
+                      >
+                        <option value="">Pilih Menu Makan Siang</option>
+                        {foods.map((food) => (
+                          <option key={food.id} value={food.food}>
+                            {food.food}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="form-label fw-semibold">
+                        Makan Malam
+                      </label>
+                      <select
+                        name="dinner"
+                        className="form-select form-select-lg"
+                        value={mealPlan.dinner}
+                        onChange={handleChange}
+                        required
+                      >
+                        <option value="">Pilih Menu Makan Malam</option>
+                        {foods.map((food) => (
+                          <option key={food.id} value={food.food}>
+                            {food.food}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="btn btn-success btn-lg w-100"
+                    >
+                      {editID ? "Update Meal Plan" : "Tambahkan Meal Plan"}
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            {/* List Section - Scrollable */}
+            <div className="col-md-6">
+              <div className="card shadow-sm border-0 rounded-4">
+                <div className="card-body p-4">
+                  <h3 className="card-title text-success mb-4 fw-semibold">
+                    Mealplan List
+                  </h3>
+                  <div
+                    className="meal-plans-container"
+                    style={{
+                      maxHeight: "calc(100vh - 350px)",
+                      overflowY: "auto",
+                      scrollbarWidth: "thin",
+                      scrollbarColor: "#198754 #ffffff",
+                    }}
+                  >
+                    <div className="pe-2">
+                      {" "}
+                      {/* Added padding for scrollbar */}
+                      {mealPlansList.map((plan) => (
+                        <div
+                          key={plan.storeID}
+                          className="card mb-3 shadow-sm border-0 hover-shadow-md transition"
+                          style={{ transition: "box-shadow 0.3s ease" }}
                         >
-                          Edit
-                        </button>
-                        <button
-                          className="btn btn-danger btn-sm"
-                          onClick={() => handleDelete(plan.storeID)}
-                        >
-                          Delete
-                        </button>
-                      </div>
+                          <div className="card-body">
+                            <div className="d-flex justify-content-between align-items-center mb-3">
+                              <h5 className="card-title fw-bold mb-0">
+                                {new Date(
+                                  plan.storecreatedAt
+                                ).toLocaleDateString("id-ID", {
+                                  weekday: "long",
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                                })}
+                              </h5>
+                              <span className="badge bg-success">
+                                {plan.storecalories} kal
+                              </span>
+                            </div>
+
+                            <div className="mb-3">
+                              <div className="row g-3">
+                                <div className="col-md-4">
+                                  <p className="mb-1 fw-semibold text-muted">
+                                    Sarapan:
+                                  </p>
+                                  <p className="mb-0">{plan.storebreakfeast}</p>
+                                </div>
+                                <div className="col-md-4">
+                                  <p className="mb-1 fw-semibold text-muted">
+                                    Makan Siang:
+                                  </p>
+                                  <p className="mb-0">{plan.storelunch}</p>
+                                </div>
+                                <div className="col-md-4">
+                                  <p className="mb-1 fw-semibold text-muted">
+                                    Makan Malam:
+                                  </p>
+                                  <p className="mb-0">{plan.storedinner}</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="d-flex justify-content-end gap-2">
+                              <button
+                                onClick={() => handleEdit(plan.storeID)}
+                                className="btn btn-warning btn-sm"
+                              >
+                                Edit
+                              </button>
+                              <button
+                                onClick={() => handleDelete(plan.storeID)}
+                                className="btn btn-danger btn-sm"
+                              >
+                                Hapus
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           </div>
